@@ -59,6 +59,22 @@
                             <accordian :title="'{{ __('admin::app.quotes.quote-information') }}'" :active="true">
                                 <div slot="body">
 
+                                    <div class="form-group">
+                                        <label for="validation">{{ __('admin::app.quotes.lead') }}</label>
+
+                                        @include('admin::common.custom-attributes.edit.lookup')
+
+                                        @php
+                                            $lookUpEntityData = app('Webkul\Attribute\Repositories\AttributeRepository')
+                                                ->getLookUpEntity('leads', request('id'));
+                                        @endphp
+
+                                        <lookup-component
+                                            :attribute="{'code': 'lead_id', 'name': 'Lead', 'lookup_type': 'leads'}"
+                                            :data='@json($lookUpEntityData)'
+                                        ></lookup-component>
+                                    </div>
+
                                     @include('admin::common.custom-attributes.edit', [
                                         'customAttributes'       => app('Webkul\Attribute\Repositories\AttributeRepository')
                                             ->scopeQuery(function($query) {
@@ -82,21 +98,7 @@
                                         'entity'                  => $quote,
                                     ])
 
-                                    <div class="form-group">
-                                        <label for="validation">{{ __('admin::app.quotes.lead') }}</label>
-
-                                        @include('admin::common.custom-attributes.edit.lookup')
-
-                                        @php
-                                            $lookUpEntityData = app('Webkul\Attribute\Repositories\AttributeRepository')
-                                                ->getLookUpEntity('leads', request('id'));
-                                        @endphp
-
-                                        <lookup-component
-                                            :attribute="{'code': 'lead_id', 'name': 'Lead', 'lookup_type': 'leads'}"
-                                            :data='@json($lookUpEntityData)'
-                                        ></lookup-component>
-                                    </div>
+                                    
 
                                 </div>
                             </accordian>
@@ -141,6 +143,17 @@
                             {!! view_render_event('admin.quotes.create.form_controls.items.after') !!}
 
                             {!! view_render_event('admin.quotes.create.form_controls.after') !!}
+                            
+
+                            {!! view_render_event('admin.quotes.create.form_buttons.before') !!}
+                            <div class="mt-1">
+                                <button type="submit" class="btn btn-md btn-primary">
+                                    {{ __('admin::app.quotes.save-btn-title') }}
+                                </button>
+                            </div>
+                            
+
+                            {!! view_render_event('admin.quotes.create.form_buttons.after') !!}
                         </div>
                     </div>
 

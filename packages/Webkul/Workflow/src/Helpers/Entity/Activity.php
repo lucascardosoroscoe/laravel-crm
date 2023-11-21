@@ -109,13 +109,13 @@ class Activity extends AbstractEntity
                         'name' => 'Note',
                     ], (object) [
                         'id'   => 'call',
-                        'name' => 'Call',
+                        'name' => 'Transferencia de Setor',
                     ], (object) [
                         'id'   => 'meeting',
-                        'name' => 'Meeting',
+                        'name' => 'Chegada no Compras',
                     ], (object) [
                         'id'   => 'lunch',
-                        'name' => 'Lunch',
+                        'name' => 'Encontro Presencial',
                     ], (object) [
                         'id'   => 'file',
                         'name' => 'File',

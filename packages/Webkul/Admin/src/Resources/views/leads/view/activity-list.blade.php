@@ -164,7 +164,7 @@
 
             {!! view_render_event('admin.leads.view.informations.activity_list.quotes.before', ['lead' => $lead]) !!}
 
-            @if (bouncer()->hasPermission('quotes'))
+            {{-- @if (bouncer()->hasPermission('quotes'))
                 <tab name="{{ __('admin::app.leads.quote') }}">
                     <div class="table lead-quote-list" style="padding: 5px">
 
@@ -262,7 +262,7 @@
                         </table>
                     </div>
                 </tab>
-            @endif
+            @endif --}}
 
             {!! view_render_event('admin.leads.view.informations.activity_list.quotes.after', ['lead' => $lead]) !!}
         </tabs>

@@ -145,7 +145,7 @@
 
                 {!! view_render_event('admin.leads.view.informations.products.before', ['lead' => $lead]) !!}
 
-                <div class="panel">
+                {{-- <div class="panel">
                     <div class="panel-header">
                         {{ __('admin::app.leads.products') }}
                     </div>
@@ -204,7 +204,7 @@
                             </div>
                         @endif
                     </div>
-                </div>
+                </div> --}}
 
                 {!! view_render_event('admin.leads.view.informations.products.after', ['lead' => $lead]) !!}
             </div>

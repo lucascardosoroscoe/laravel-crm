@@ -122,16 +122,16 @@ class AttributeForm extends FormRequest
                 }
             }
 
-            if ($attribute->is_unique) {
-                array_push($validations[in_array($attribute->type, ['email', 'phone'])
-                    ? $attribute->code . '.*.value'
-                    : $attribute->code
-                ], function ($field, $value, $fail) use ($attribute) {
-                    if (! $this->attributeValueRepository->isValueUnique($this->id, $attribute->entity_type, $attribute, request($field))) {
-                        $fail('The value has already been taken.');
-                    }
-                });
-            }
+            // if ($attribute->is_unique) {
+            //     array_push($validations[in_array($attribute->type, ['email', 'phone'])
+            //         ? $attribute->code . '.*.value'
+            //         : $attribute->code
+            //     ], function ($field, $value, $fail) use ($attribute) {
+            //         if (! $this->attributeValueRepository->isValueUnique($this->id, $attribute->entity_type, $attribute, request($field))) {
+            //             $fail('The value has already been taken.');
+            //         }
+            //     });
+            // }
 
             $this->rules = array_merge($this->rules, $validations);
         }

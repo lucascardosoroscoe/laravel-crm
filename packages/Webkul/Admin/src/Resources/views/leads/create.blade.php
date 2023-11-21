@@ -75,7 +75,7 @@
                             {!! view_render_event('admin.leads.create.form_controls.contact_person.after') !!}
 
 
-                            {!! view_render_event('admin.leads.create.form_controls.products.before') !!} 
+                            {{-- {!! view_render_event('admin.leads.create.form_controls.products.before') !!} 
 
                             <tab name="{{ __('admin::app.leads.products') }}">
                                 @include('admin::leads.common.products')
@@ -83,7 +83,7 @@
                                 <product-list :data='@json(old('products'))'></product-list>
                             </tab>
 
-                            {!! view_render_event('admin.leads.create.form_controls.products.after') !!}
+                            {!! view_render_event('admin.leads.create.form_controls.products.after') !!} --}}
                         </tabs>
 
                         {!! view_render_event('admin.leads.create.form_controls.after') !!}

@@ -97,7 +97,8 @@ return [
     |
      */
 
-    'locale' => 'en',
+    // 'locale' => 'en',
+    'locale' => 'pt_BR',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,9 +111,7 @@ return [
      */
 
     'available_locales' => [
-        'en' => 'English',
-        'tr' => 'Türkçe',
-        'ar' => 'Arabic',
+        'en' => 'Português',
     ],
 
     /*

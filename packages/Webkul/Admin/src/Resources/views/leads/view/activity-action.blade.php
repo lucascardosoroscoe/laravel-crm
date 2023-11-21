@@ -7,7 +7,20 @@
 @push('scripts')
 
     <script type="text/x-template" id="activity-action-component-template">
+
         <tabs>
+            {!! view_render_event('admin.leads.view.informations.activity_actions.quote.before', ['lead' => $lead]) !!}
+
+            {{-- @if (bouncer()->hasPermission('quotes.create'))
+                <tab name="{{ __('admin::app.leads.quote') }}">
+
+                    <a href="{{ route('admin.quotes.create', $lead->id) }}" class="btn btn-primary">{{ __('admin::app.leads.create-quote') }}</a>
+
+                </tab>
+            @endif --}}
+
+            {!! view_render_event('admin.leads.view.informations.activity_actions.quote.after', ['lead' => $lead]) !!}
+
             {!! view_render_event('admin.leads.view.informations.activity_actions.note.before', ['lead' => $lead]) !!}
 
             <tab name="{{ __('admin::app.leads.note') }}" :selected="true">
@@ -48,6 +61,62 @@
             </tab>
 
             {!! view_render_event('admin.leads.view.informations.activity_actions.note.after', ['lead' => $lead]) !!}
+
+            
+            {!! view_render_event('admin.leads.view.informations.activity_actions.file.before', ['lead' => $lead]) !!}
+
+            <tab name="{{ __('admin::app.leads.file') }}">
+                <form
+                    action="{{ route('admin.activities.file_upload') }}"
+                    method="post"
+                    enctype="multipart/form-data"
+                    data-vv-scope="file-form"
+                    @submit.prevent="onSubmit($event, 'file-form')"
+                >
+
+                    <input type="hidden" name="type" value="file">
+
+                    <input type="hidden" name="lead_id" value="{{ $lead->id }}">
+
+                    @csrf()
+
+                    <div class="form-group">
+                        <label for="name">{{ __('admin::app.leads.name') }}</label>
+
+                        <input type="text" class="control" id="name" name="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment">{{ __('admin::app.leads.description') }}</label>
+
+                        <textarea class="control" id="files-comment" name="comment">{{ old('comment') }}</textarea>
+                    </div>
+
+                    <div class="form-group" :class="[errors.has('file-form.file') ? 'has-error' : '']">
+                        <label for="file" class="required">{{ __('admin::app.leads.file') }}</label>
+
+                        <input
+                            type="file"
+                            name="file"
+                            class="control"
+                            id="file"
+                            v-validate="'required'"
+                            data-vv-as="&quot;{{ __('admin::app.leads.file') }}&quot;"
+                        >
+
+                        <span class="control-error" v-if="errors.has('file-form.file')">
+                            @{{ errors.first('file-form.file') }}
+                        </span>
+                    </div>
+
+                    <button type="submit" class="btn btn-md btn-primary">
+                        {{ __('admin::app.leads.upload') }}
+                    </button>
+
+                </form>
+            </tab>
+
+            {!! view_render_event('admin.leads.view.informations.activity_actions.file.after', ['lead' => $lead]) !!}
 
 
             {!! view_render_event('admin.leads.view.informations.activity_actions.activity.before', ['lead' => $lead]) !!}
@@ -341,73 +410,9 @@
             {!! view_render_event('admin.leads.view.informations.activity_actions.email.after', ['lead' => $lead]) !!}
 
 
-            {!! view_render_event('admin.leads.view.informations.activity_actions.file.before', ['lead' => $lead]) !!}
+            
 
-            <tab name="{{ __('admin::app.leads.file') }}">
-                <form
-                    action="{{ route('admin.activities.file_upload') }}"
-                    method="post"
-                    enctype="multipart/form-data"
-                    data-vv-scope="file-form"
-                    @submit.prevent="onSubmit($event, 'file-form')"
-                >
-
-                    <input type="hidden" name="type" value="file">
-
-                    <input type="hidden" name="lead_id" value="{{ $lead->id }}">
-
-                    @csrf()
-
-                    <div class="form-group">
-                        <label for="name">{{ __('admin::app.leads.name') }}</label>
-
-                        <input type="text" class="control" id="name" name="name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="comment">{{ __('admin::app.leads.description') }}</label>
-
-                        <textarea class="control" id="files-comment" name="comment">{{ old('comment') }}</textarea>
-                    </div>
-
-                    <div class="form-group" :class="[errors.has('file-form.file') ? 'has-error' : '']">
-                        <label for="file" class="required">{{ __('admin::app.leads.file') }}</label>
-
-                        <input
-                            type="file"
-                            name="file"
-                            class="control"
-                            id="file"
-                            v-validate="'required'"
-                            data-vv-as="&quot;{{ __('admin::app.leads.file') }}&quot;"
-                        >
-
-                        <span class="control-error" v-if="errors.has('file-form.file')">
-                            @{{ errors.first('file-form.file') }}
-                        </span>
-                    </div>
-
-                    <button type="submit" class="btn btn-md btn-primary">
-                        {{ __('admin::app.leads.upload') }}
-                    </button>
-
-                </form>
-            </tab>
-
-            {!! view_render_event('admin.leads.view.informations.activity_actions.file.after', ['lead' => $lead]) !!}
-
-
-            {!! view_render_event('admin.leads.view.informations.activity_actions.quote.before', ['lead' => $lead]) !!}
-
-            @if (bouncer()->hasPermission('quotes.create'))
-                <tab name="{{ __('admin::app.leads.quote') }}">
-
-                    <a href="{{ route('admin.quotes.create', $lead->id) }}" class="btn btn-primary">{{ __('admin::app.leads.create-quote') }}</a>
-
-                </tab>
-            @endif
-
-            {!! view_render_event('admin.leads.view.informations.activity_actions.quote.after', ['lead' => $lead]) !!}
+            
         </tabs>
     </script>
 
